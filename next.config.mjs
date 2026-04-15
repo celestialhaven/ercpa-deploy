@@ -1,11 +1,10 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+  output: "export",
   images: {
     unoptimized: true,
   },
+  basePath: "/ercpa-draft",
+  assetPrefix: "/ercpa-draft/",
 }
 
 export default nextConfig
