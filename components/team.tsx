@@ -52,7 +52,7 @@ function TeamCard({
 }) {
   return (
     <Card className="group h-full overflow-hidden border-border bg-card p-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-      <div className="relative h-[22rem] sm:h-[24rem] lg:h-120 w-full overflow-hidden">
+      <div className="relative h-[22rem] sm:h-[24rem] lg:h-90 w-full overflow-hidden">
         <Image
           src={member.image}
           alt={member.name}
