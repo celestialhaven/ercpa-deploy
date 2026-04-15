@@ -102,7 +102,7 @@ export function Header() {
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
-                  <Menu className="h-6 w-10" />
+                  <Menu className="h-10 w-10" />
                   <span className="sr-only">Open menu</span>
                 </Button>
               </SheetTrigger>
@@ -117,7 +117,7 @@ export function Header() {
                       className="flex items-center"
                     >
                       <Image
-                        src="/ercpa.webp"
+                        src="/logo.webp"
                         alt="Logo"
                         width={140}
                         height={45}
