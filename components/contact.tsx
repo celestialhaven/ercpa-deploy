@@ -159,7 +159,7 @@ export function Contact() {
 
           {/* CONTACT INFO SIDE */}
           <div className="flex flex-col justify-center gap-8">
-            
+
             {/* TOP: CONTACT CARD */}
             <div className="rounded-2xl border border-border bg-card p-8 shadow-sm lg:p-10">
               <h3 className="font-serif text-2xl font-semibold text-foreground">
@@ -248,7 +248,7 @@ export function Contact() {
                   {/* ITEM 1 */}
                   <div className="flex gap-4">
                     <img
-                      src="https://source.unsplash.com/80x80/?finance"
+                      src="/team/placeholder.webp"
                       alt="news"
                       className="h-20 w-20 rounded-lg object-cover"
                     />
@@ -271,7 +271,7 @@ export function Contact() {
                   {/* ITEM 2 */}
                   <div className="flex gap-4">
                     <img
-                      src="https://source.unsplash.com/80x80/?business"
+                      src="/team/placeholder.webp"
                       alt="news"
                       className="h-20 w-20 rounded-lg object-cover"
                     />
@@ -315,7 +315,7 @@ export function Contact() {
                 <div className="mt-6">
                   <div className="flex gap-4">
                     <img
-                      src="https://source.unsplash.com/80x80/?office,team"
+                      src="/team/placeholder.webp"
                       alt="career"
                       className="h-20 w-20 rounded-lg object-cover"
                     />
