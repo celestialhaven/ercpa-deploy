@@ -1,31 +1,28 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 const managementTeam = [
-  { name: "Matthew J. Solidum, CPA", role: "Managing Partner", image: "/team/placeholder.webp", href: "#" },
-  { name: "Robert J. Helm, CPA", role: "Partner", image: "/team/placeholder.webp", href: "#" },
-  { name: "Thomas J. Everett, CPA, CGMA", role: "Partner", image: "/team/placeholder.webp", href: "#" },
-  { name: "Amanda J. Kastler, CPA, CFE", role: "Partner", image: "/team/placeholder.webp", href: "#" },
-  { name: "Stephanie J. Rice, CPA, CFE", role: "Partner", image: "/team/placeholder.webp", href: "#" },
-  { name: "Carrie C. Brown, CPA", role: "Partner", image: "/team/placeholder.webp", href: "#" },
-  { name: "Katie S. Porter, CPA", role: "Partner", image: "/team/placeholder.webp", href: "#" },
-  { name: "Marissa L. Randolph, CPA", role: "Partner", image: "/team/placeholder.webp", href: "#" },
-]
-
-const additionalTeam = [
-  "Laurie D. Bebee",
-  "Nichole Springer, CPA",
-  "Dana J. Vermule, CPA",
-  "Saralyn Forsman, CPA",
-  "Briana Bates, CPA",
-  "Brittany K. Hopp, CPA, CFE, CVA",
-  "Stephen Gintz, CPA",
+  { name: "Robert J. Helm, CPA", role: "Partner", image: "/team/robert-helm.webp", href: "#" },
+  { name: "Thomas J. Everett, CPA, CGMA", role: "Partner", image: "/team/thomas-everett.webp", href: "#" },
+  { name: "Mathew J. Solidum, CPA", role: "Managing Partner", image: "/team/matthew-solidum.webp", href: "#" },
+  { name: "Amanda J. Kastler, CPA, CFE", role: "Partner", image: "/team/amanda-kastler.webp", href: "#" },
+  { name: "Stephanie J. Rice, CPA, CFE", role: "Partner", image: "/team/stephanie-brown.webp", href: "#" },
+  { name: "Carrie C. Brown, CPA", role: "Partner", image: "/team/carrie-brown.webp", href: "#" },
+  { name: "Katie S. Porter, CPA", role: "Manager", image: "/team/katie-porter.webp", href: "#" },
+  { name: "Marissa L. Randolph, CPA", role: "Manager", image: "/team/marissa-randolph.webp", href: "#" },
+  { name: "Laurie D. Bebee", role: "Partner", image: "/team/laurie-bebee.webp", href: "#" },
+  { name: "Nichole Springer, CPA", role: "Manager", image: "/team/nichole-springer.webp", href: "#" },
+  { name: "Dana J. Vermule, CPA", role: "Partner", image: "/team/dana-vermule.webp", href: "#" },
+  { name: "Saralyn Forsman, CPA", role: "Manager", image: "/team/saralyn-glascock.webp", href: "#" },
+  { name: "Briana Bates, CPA", role: "Manager", image: "/team/briana-bates.webp", href: "#" },
+  { name: "Brittany K. Hopp, CPA, CFE, CVA", role: "Partner", image: "/team/brittany-hopp.webp", href: "#" },
+  { name: "Stephen Gintz, CPA", role: "Partner", image: "/team/stephen-gintz.webp", href: "#" },
 ]
 
 type TeamMember = {
@@ -57,14 +54,14 @@ function TeamCard({
           src={member.image}
           alt={member.name}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-black/0 transition group-hover:bg-black/20" />
       </div>
 
       <CardContent className="px-4 pt-0 pb-8 text-center">
-        <h3 className="mt-3 font-semibold text-foreground">{member.name}</h3>
-        <p className="mt-1 text-sm text-muted-foreground">{member.role}</p>
+        <h3 className="mt-3 text-[18px] font-semibold text-primary">{member.name}</h3>
+        <p className="mt-1 text-[14px] text-muted-foreground">{member.role}</p>
 
         <Button
           asChild
@@ -88,12 +85,15 @@ export function Team() {
   const [itemsPerSlide, setItemsPerSlide] = useState(1)
   const [currentSlide, setCurrentSlide] = useState(0)
 
+  const touchStartX = useRef(0)
+  const touchEndX = useRef(0)
+
   useEffect(() => {
     const updateItemsPerSlide = () => {
       if (window.innerWidth >= 640) {
-        setItemsPerSlide(2) // tablet
+        setItemsPerSlide(2)
       } else {
-        setItemsPerSlide(1) // mobile
+        setItemsPerSlide(1)
       }
     }
 
@@ -121,10 +121,29 @@ export function Team() {
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
   }
 
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = e.changedTouches[0].clientX
+    touchEndX.current = e.changedTouches[0].clientX
+  }
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    touchEndX.current = e.changedTouches[0].clientX
+  }
+
+  const handleTouchEnd = () => {
+    const swipeDistance = touchStartX.current - touchEndX.current
+    const minSwipeDistance = 50
+
+    if (swipeDistance > minSwipeDistance) {
+      goToNext()
+    } else if (swipeDistance < -minSwipeDistance) {
+      goToPrev()
+    }
+  }
+
   return (
     <section id="team" className="py-12 sm:py-16 lg:py-20">
-      <div className="mx-auto w-full max-w-[1500px] px-4 sm:px-6 lg:px-8 space-y-16 lg:space-y-20">
-        {/* HEADER */}
+      <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8 space-y-16 lg:space-y-20">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-accent">
             Our People
@@ -137,9 +156,13 @@ export function Team() {
           </p>
         </div>
 
-        {/* MOBILE / TABLET CAROUSEL */}
         <div className="lg:hidden">
-          <div className="relative overflow-hidden">
+          <div
+            className="relative overflow-hidden touch-pan-y"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             <div
               className="flex transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -160,7 +183,6 @@ export function Team() {
             </div>
           </div>
 
-          {/* CONTROLS + PAGINATION */}
           <div className="mt-6 flex items-center justify-center gap-4">
             <div className="flex items-center gap-2">
               {slides.map((_, index) => (
@@ -169,25 +191,22 @@ export function Team() {
                   type="button"
                   aria-label={`Go to slide ${index + 1}`}
                   onClick={() => setCurrentSlide(index)}
-                  className={`h-2.5 rounded-full transition-all ${
-                    currentSlide === index
+                  className={`h-2.5 rounded-full transition-all ${currentSlide === index
                       ? "w-8 bg-primary"
                       : "w-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                  }`}
+                    }`}
                 />
               ))}
             </div>
           </div>
         </div>
 
-        {/* LAPTOP GRID: 3 COLUMNS */}
         <div className="hidden gap-8 lg:grid xl:hidden lg:grid-cols-3">
           {managementTeam.map((member) => (
             <TeamCard key={member.name} member={member} />
           ))}
         </div>
 
-        {/* LARGE SCREEN GRID: 4 COLUMNS */}
         <div className="hidden gap-8 xl:grid xl:grid-cols-4">
           {managementTeam.map((member) => (
             <TeamCard key={member.name} member={member} />
