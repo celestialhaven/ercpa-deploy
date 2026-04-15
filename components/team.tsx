@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 
 const managementTeam = [
-  { name: "Matthew J. Solidum, CPA", role: "Managing Partner", image: "/team/placeholder.webp", href: "#" },
+  { name: "Robert J. Helm, CPA", role: "Partner", image: "/team/robert-helm.webp", href: "#" },
   { name: "Robert J. Helm, CPA", role: "Partner", image: "/team/placeholder.webp", href: "#" },
   { name: "Thomas J. Everett, CPA, CGMA", role: "Partner", image: "/team/placeholder.webp", href: "#" },
   { name: "Amanda J. Kastler, CPA, CFE", role: "Partner", image: "/team/placeholder.webp", href: "#" },
@@ -52,7 +52,7 @@ function TeamCard({
 }) {
   return (
     <Card className="group h-full overflow-hidden border-border bg-card p-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-      <div className="relative h-[22rem] sm:h-[24rem] lg:h-80 w-full overflow-hidden">
+      <div className="relative h-[22rem] sm:h-[24rem] lg:h-120 w-full overflow-hidden">
         <Image
           src={member.image}
           alt={member.name}
@@ -169,11 +169,10 @@ export function Team() {
                   type="button"
                   aria-label={`Go to slide ${index + 1}`}
                   onClick={() => setCurrentSlide(index)}
-                  className={`h-2.5 rounded-full transition-all ${
-                    currentSlide === index
-                      ? "w-8 bg-primary"
-                      : "w-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                  }`}
+                  className={`h-2.5 rounded-full transition-all ${currentSlide === index
+                    ? "w-8 bg-primary"
+                    : "w-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                    }`}
                 />
               ))}
             </div>
