@@ -39,7 +39,7 @@ export function Footer() {
           <div className="flex flex-col items-center lg:items-start">
             <Link href="/" className="flex items-center justify-center gap-3 lg:justify-start">
               <Image
-                src="/ercpa.webp"
+                src="/logo.webp"
                 alt="Logo"
                 width={120}
                 height={40}
