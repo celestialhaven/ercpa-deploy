@@ -75,7 +75,7 @@ export function Header() {
 
       {/* Main Header - sticky */}
       <div className="sticky top-0 z-50 w-full border-b border-border bg-[#f3f3f3]">
-        <div className="mx-auto flex h-[65px] max-w-7xl items-center justify-between px-6 lg:px-8">
+        <div className="mx-auto flex h-[65px] max-w-7xl items-center justify-between px-2 lg:px-8">
           <Link href="/" className="flex items-center gap-3">
             <Image
               src="/logo.webp"
