@@ -75,14 +75,14 @@ export function Header() {
 
       {/* Main Header - sticky */}
       <div className="sticky top-0 z-50 w-full border-b border-border bg-[#f3f3f3]">
-        <div className="mx-auto flex h-[100px] max-w-7xl items-center justify-between px-6 lg:px-8">
+        <div className="mx-auto flex h-[70px] max-w-7xl items-center justify-between px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-3">
             <Image
               src="/logo.webp"
               alt="Logo"
               width={120}
               height={40}
-              className="h-14 w-auto object-contain sm:h-14 md:h-16 lg:h-[72px]"
+              className="h-16 w-auto object-contain sm:h-16 md:h-16 lg:h-[72px]"
             />
           </Link>
 
@@ -101,13 +101,21 @@ export function Header() {
           <div className="flex items-center gap-4 lg:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-10 w-10" />
+                <Button
+                  variant="ghost"
+                  className="h-12 w-12 flex items-center justify-center 
+                            text-black hover:text-black 
+                            hover:bg-transparent focus:bg-transparent active:bg-transparent"
+                >
+                  <Menu className="h-9 w-9 scale-x-200" />
                   <span className="sr-only">Open menu</span>
                 </Button>
               </SheetTrigger>
 
-              <SheetContent side="right" className="w-[320px] bg-white p-0 sm:w-[380px] lg:hidden">
+              <SheetContent
+                side="right"
+                className="w-[320px] bg-white p-0 sm:w-[380px] lg:hidden"
+              >
                 <div className="flex h-full flex-col">
                   {/* Top area */}
                   <div className="border-b border-border px-6 py-5">
@@ -155,37 +163,16 @@ export function Header() {
                       </p>
 
                       <div className="flex flex-col gap-1">
-                        <Link
-                          href="#"
-                          onClick={() => setIsOpen(false)}
-                          className="rounded-md px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
-                        >
-                          Pay Online
-                        </Link>
-
-                        <Link
-                          href="#"
-                          onClick={() => setIsOpen(false)}
-                          className="rounded-md px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
-                        >
-                          Client Portal
-                        </Link>
-
-                        <Link
-                          href="#"
-                          onClick={() => setIsOpen(false)}
-                          className="rounded-md px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
-                        >
-                          Staff Profiles
-                        </Link>
-
-                        <Link
-                          href="#"
-                          onClick={() => setIsOpen(false)}
-                          className="rounded-md px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
-                        >
-                          Contact Us
-                        </Link>
+                        {topLinks.map((link) => (
+                          <Link
+                            key={link.name}
+                            href={link.href}
+                            onClick={() => setIsOpen(false)}
+                            className="rounded-md px-3 py-3 text-base font-medium text-foreground transition-colors hover:bg-muted hover:text-primary"
+                          >
+                            {link.name}
+                          </Link>
+                        ))}
                       </div>
                     </div>
                   </div>
