@@ -1,11 +1,11 @@
 "use client"
 
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 
 const managementTeam = [
   { name: "Robert J. Helm, CPA", role: "Partner", image: "/team/robert-helm.webp", href: "#" },
@@ -23,16 +23,6 @@ const managementTeam = [
   { name: "Briana Bates, CPA", role: "Manager", image: "/team/briana-bates.webp", href: "#" },
   { name: "Brittany K. Hopp, CPA, CFE, CVA", role: "Partner", image: "/team/brittany-hopp.webp", href: "#" },
   { name: "Stephen Gintz, CPA", role: "Partner", image: "/team/stephen-gintz.webp", href: "#" },
-]
-
-const additionalTeam = [
-  "Laurie D. Bebee",
-  "Nichole Springer, CPA",
-  "Dana J. Vermule, CPA",
-  "Saralyn Forsman, CPA",
-  "Briana Bates, CPA",
-  "Brittany K. Hopp, CPA, CFE, CVA",
-  "Stephen Gintz, CPA",
 ]
 
 type TeamMember = {
@@ -95,12 +85,15 @@ export function Team() {
   const [itemsPerSlide, setItemsPerSlide] = useState(1)
   const [currentSlide, setCurrentSlide] = useState(0)
 
+  const touchStartX = useRef(0)
+  const touchEndX = useRef(0)
+
   useEffect(() => {
     const updateItemsPerSlide = () => {
       if (window.innerWidth >= 640) {
-        setItemsPerSlide(2) // tablet
+        setItemsPerSlide(2)
       } else {
-        setItemsPerSlide(1) // mobile
+        setItemsPerSlide(1)
       }
     }
 
@@ -128,10 +121,29 @@ export function Team() {
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
   }
 
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    touchStartX.current = e.changedTouches[0].clientX
+    touchEndX.current = e.changedTouches[0].clientX
+  }
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    touchEndX.current = e.changedTouches[0].clientX
+  }
+
+  const handleTouchEnd = () => {
+    const swipeDistance = touchStartX.current - touchEndX.current
+    const minSwipeDistance = 50
+
+    if (swipeDistance > minSwipeDistance) {
+      goToNext()
+    } else if (swipeDistance < -minSwipeDistance) {
+      goToPrev()
+    }
+  }
+
   return (
     <section id="team" className="py-12 sm:py-16 lg:py-20">
       <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8 space-y-16 lg:space-y-20">
-        {/* HEADER */}
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-accent">
             Our People
@@ -144,9 +156,13 @@ export function Team() {
           </p>
         </div>
 
-        {/* MOBILE / TABLET CAROUSEL */}
         <div className="lg:hidden">
-          <div className="relative overflow-hidden">
+          <div
+            className="relative overflow-hidden touch-pan-y"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             <div
               className="flex transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -167,7 +183,6 @@ export function Team() {
             </div>
           </div>
 
-          {/* CONTROLS + PAGINATION */}
           <div className="mt-6 flex items-center justify-center gap-4">
             <div className="flex items-center gap-2">
               {slides.map((_, index) => (
@@ -177,8 +192,8 @@ export function Team() {
                   aria-label={`Go to slide ${index + 1}`}
                   onClick={() => setCurrentSlide(index)}
                   className={`h-2.5 rounded-full transition-all ${currentSlide === index
-                    ? "w-8 bg-primary"
-                    : "w-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                      ? "w-8 bg-primary"
+                      : "w-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
                     }`}
                 />
               ))}
@@ -186,14 +201,12 @@ export function Team() {
           </div>
         </div>
 
-        {/* LAPTOP GRID: 3 COLUMNS */}
         <div className="hidden gap-8 lg:grid xl:hidden lg:grid-cols-3">
           {managementTeam.map((member) => (
             <TeamCard key={member.name} member={member} />
           ))}
         </div>
 
-        {/* LARGE SCREEN GRID: 4 COLUMNS */}
         <div className="hidden gap-8 xl:grid xl:grid-cols-4">
           {managementTeam.map((member) => (
             <TeamCard key={member.name} member={member} />
