@@ -9,13 +9,20 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 
 const managementTeam = [
   { name: "Robert J. Helm, CPA", role: "Partner", image: "/team/robert-helm.webp", href: "#" },
-  { name: "Robert J. Helm, CPA", role: "Partner", image: "/team/placeholder.webp", href: "#" },
-  { name: "Thomas J. Everett, CPA, CGMA", role: "Partner", image: "/team/placeholder.webp", href: "#" },
-  { name: "Amanda J. Kastler, CPA, CFE", role: "Partner", image: "/team/placeholder.webp", href: "#" },
-  { name: "Stephanie J. Rice, CPA, CFE", role: "Partner", image: "/team/placeholder.webp", href: "#" },
-  { name: "Carrie C. Brown, CPA", role: "Partner", image: "/team/placeholder.webp", href: "#" },
-  { name: "Katie S. Porter, CPA", role: "Partner", image: "/team/placeholder.webp", href: "#" },
-  { name: "Marissa L. Randolph, CPA", role: "Partner", image: "/team/placeholder.webp", href: "#" },
+  { name: "Thomas J. Everett, CPA, CGMA", role: "Partner", image: "/team/thomas-everett.webp", href: "#" },
+  { name: "Mathew J. Solidum, CPA", role: "Managing Partner", image: "/team/matthew-solidum.webp", href: "#" },
+  { name: "Amanda J. Kastler, CPA, CFE", role: "Partner", image: "/team/amanda-kastler.webp", href: "#" },
+  { name: "Stephanie J. Rice, CPA, CFE", role: "Partner", image: "/team/stephanie-brown.webp", href: "#" },
+  { name: "Carrie C. Brown, CPA", role: "Partner", image: "/team/carrie-brown.webp", href: "#" },
+  { name: "Katie S. Porter, CPA", role: "Manager", image: "/team/katie-porter.webp", href: "#" },
+  { name: "Marissa L. Randolph, CPA", role: "Manager", image: "/team/marissa-randolph.webp", href: "#" },
+  { name: "Laurie D. Bebee", role: "Partner", image: "/team/laurie-bebee.webp", href: "#" },
+  { name: "Nichole Springer, CPA", role: "Manager", image: "/team/nichole-springer.webp", href: "#" },
+  { name: "Dana J. Vermule, CPA", role: "Partner", image: "/team/dana-vermule.webp", href: "#" },
+  { name: "Saralyn Forsman, CPA", role: "Manager", image: "/team/saralyn-glascock.webp", href: "#" },
+  { name: "Briana Bates, CPA", role: "Manager", image: "/team/briana-bates.webp", href: "#" },
+  { name: "Brittany K. Hopp, CPA, CFE, CVA", role: "Partner", image: "/team/brittany-hopp.webp", href: "#" },
+  { name: "Stephen Gintz, CPA", role: "Partner", image: "/team/stephen-gintz.webp", href: "#" },
 ]
 
 const additionalTeam = [
@@ -52,19 +59,19 @@ function TeamCard({
 }) {
   return (
     <Card className="group h-full overflow-hidden border-border bg-card p-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-      <div className="relative h-[22rem] sm:h-[24rem] lg:h-90 w-full overflow-hidden">
+      <div className="relative h-[22rem] sm:h-[24rem] lg:h-80 w-full overflow-hidden">
         <Image
           src={member.image}
           alt={member.name}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-black/0 transition group-hover:bg-black/20" />
       </div>
 
       <CardContent className="px-4 pt-0 pb-8 text-center">
-        <h3 className="mt-3 font-semibold text-foreground">{member.name}</h3>
-        <p className="mt-1 text-sm text-muted-foreground">{member.role}</p>
+        <h3 className="mt-3 text-[18px] font-semibold text-primary">{member.name}</h3>
+        <p className="mt-1 text-[14px] text-muted-foreground">{member.role}</p>
 
         <Button
           asChild
@@ -123,7 +130,7 @@ export function Team() {
 
   return (
     <section id="team" className="py-12 sm:py-16 lg:py-20">
-      <div className="mx-auto w-full max-w-[1500px] px-4 sm:px-6 lg:px-8 space-y-16 lg:space-y-20">
+      <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8 space-y-16 lg:space-y-20">
         {/* HEADER */}
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-accent">
