@@ -4,7 +4,7 @@ import { Award, Phone } from "lucide-react"
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[65dvh] sm:min-h-[75vh] lg:min-h-[85vh] items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8">
+    <section className="relative flex min-h-[80dvh] sm:min-h-[80vh] lg:min-h-[85vh] items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8">
       {/* Background Video */}
       <video
         className="absolute inset-0 z-0 h-full w-full object-cover"
