@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button"
 
 const approach = [
   "We Listen",
-  "We Evaluate", 
+  "We Evaluate",
   "We Create Solutions Designed to Meet Your Needs",
 ]
 
@@ -24,7 +24,7 @@ export function About() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/elliott-robinson-office.webp" // 👉 replace with your image
+          src="/elliott-robinson-office.webp"
           alt="Background"
           className="h-full w-full object-cover"
         />
@@ -51,14 +51,14 @@ export function About() {
             </h2>
 
             <p className="mt-6 text-lg leading-relaxed text-white/80">
-              Since our founding, Elliott, Robinson & Company has been dedicated to providing 
-              exceptional accounting and advisory services to businesses and individuals 
+              Since our founding, Elliott, Robinson & Company has been dedicated to providing
+              exceptional accounting and advisory services to businesses and individuals
               throughout the Springfield area and beyond.
             </p>
 
             <p className="mt-4 text-lg leading-relaxed text-white/80">
-              Our team of certified public accountants brings decades of combined experience 
-              across diverse industries, ensuring that no matter your financial needs, 
+              Our team of certified public accountants brings decades of combined experience
+              across diverse industries, ensuring that no matter your financial needs,
               we have the expertise to help you succeed.
             </p>
 
@@ -119,7 +119,7 @@ export function About() {
                   Our Mission
                 </h4>
                 <p className="mt-2 text-white/70">
-                  Where Clients Come First — We are committed to building lasting 
+                  Where Clients Come First — We are committed to building lasting
                   relationships based on integrity, expertise, and personalized service.
                 </p>
               </div>
